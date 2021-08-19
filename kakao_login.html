@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Kakao JavaScript SDK</title>
+	<!-- javascript sdk 페이지로 src 설정하여 항상 최신 파일로 업데이트 -->
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+	<script src="/app_switch.js"> </script>
+	
+	<a id="custom-login-btn" href="javascript:loginWithKakao()">
+		<img
+		src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
+		width="222"
+		 />
+	</a>
+
+	
+	<p>
+		<a id = "custom-login-btn" href = "/friends_list"></a>
+		<form action="/friends_list" method="get">
+			<button>Load the friends_list using REST API</button>
+		</form>
+	</p>
+
+	<p>
+		<a id = "custom-login-btn" href = "/send_msg_self"></a>
+		<form action="/send_msg_self" method="get">
+			<button>sending Message Self using REST API</button>
+		</form>
+	</p>
+	
+	<p>
+		<a id = "custom-login-btn" href = "/send_msg_friend"></a>
+		<form action="/send_msg_friend" method="get">
+			<button>sending Message to Friend using REST API</button>
+		</form>
+	</p>
+
+
+	
+	<p id="token-result"></p>
+	
+<script type="text/javascript">
+	
+	Kakao.Auth.setAccessToken('ZbOpwBnekE4uvWoR4x2bwW3i8syepfecIQuHTworDKYAAAF7EZQE3Q');
+	
+  function loginWithKakao() {
+	Kakao.init('74e5998a2ec9e64ac7a39c401d8624ea');
+    Kakao.Auth.authorize({
+      redirectUri: 'https://jskakao.run.goorm.io',
+	  scope : 'friends' // 추가 적으로 '친구 목록 가져오기' 항목에 대한 동의를 구한다.
+    })
+  }
+	
+	function load_friends() {
+		Kakao.Auth.setAccessToken('ZbOpwBnekE4uvWoR4x2bwW3i8syepfecIQuHTworDKYAAAF7EZQE3Q');
+		Kakao.API.request({ 
+			url: '/v1/api/talk/friends',
+			success: function(response) {
+				console.log(response);
+				document.getElementById("friend_list").innerText = JSON.stringify(response);
+			},
+			fail: function(error) {
+				console.log(error);
+			}
+		});
+	}
+	
+  // 아래는 데모를 위한 UI 코드입니다.
+	// displayToken()  
+	// function displayToken() {
+	// const token = getCookie('authorize-access-token')
+
+	// if(token) {
+	//   console.log('token received')
+	// Kakao.Auth.setAccessToken(token)
+	// Kakao.Auth.getStatusInfo(({ status }) => {
+	// if(status === 'connected') {
+	// document.getElementById('token-result').innerText = 'login success. token: ' + Kakao.Auth.getAccessToken()
+	// } else {
+	// Kakao.Auth.setAccessToken(null)
+		  
+	// }
+	// })
+	// }
+	// else {
+	// 	document.getElementById('token-result').innerText = 'login failed - token not received'
+	// }
+	// }
+	
+	// function getCookie(name) {
+	// const value = "; " + document.cookie;
+	// const parts = value.split("; " + name + "=");
+	// if (parts.length === 2) return parts.pop().split(";").shift();
+	  
+	// }
+</script>
+
+
+	<!-- <a id="custom-login-btn" href="kakao_login_function.js">
+		<script src="kakao_login_function.js"> </script>
+		<img
+		src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
+		width="222"
+		/>
+	</a>
+	<p id="token-result"></p> -->
+
+	
+</head>
+<body>Hello Kakao</body>
+</html>

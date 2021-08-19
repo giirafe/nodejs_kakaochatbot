@@ -1,0 +1,20 @@
+{
+	"dependencies": {
+		"axios": "^0.21.1",
+		"body-parser": "^1.19.0",
+		"express": "^4.17.1",
+		"mysql": "^2.18.1",
+		"pm2": "^5.1.0",
+		"request": "^2.88.2"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node app",
+		"dev": "nodemon app"
+	},
+	"author": "June Seo",
+	"license": "ISC",
+	"devDependencies": {
+		"nodemon": "^2.0.7"
+	}
+}
